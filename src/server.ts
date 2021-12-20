@@ -2,11 +2,12 @@
 //Dependencies 
 ////////////////
 import express, {Request, Response} from "express"
-import session from "express-session"
 require("dotenv").config()
 const mongoose = require("mongoose")
 const morgan = require("morgan")
 const cors = require("cors")
+
+import session from "cookie-session"
 
 const MongoStore = require('connect-mongo');
 
@@ -47,14 +48,37 @@ const noteSchema = new Schema ({
 
 const Note = model("Note", noteSchema)
 
+
+
+//////////////////////////////////////
+//Express User Auth session stuff
+/////////////////////////////////////
+
+// Bodyparser middleware, extended false does not allow nested payloads
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+// const session = require("express-session")
+
+app.use(
+  session({
+    secret: "SKETCHTHECONDUCTORTHEBESTRAPPER",
+    // resave: false,
+    // saveUninitialized: true,
+    // store: new MongoStore({ mongooseConnection: mongoose.connection})
+  })
+);
+
+
 /////////////////////////////////
 //Middleware
 //////////////////////////////////
 app.use(cors()) // prevent cors errors, opens up access for frontend
 app.use(morgan("dev")) //logging
 app.use(express.json()) // parse json bodies
-app.use(passport.initialize());
+app.use(passport.initialize()); //passport middle-ware
 app.use(passport.session());
+
 
 
 ///////////////

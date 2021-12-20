@@ -65,6 +65,15 @@ var noteSchema = new Schema({
     chords: String,
 });
 var Note = model("Note", noteSchema);
+app.use(express_1.default.json());
+app.use(express_1.default.urlencoded({ extended: false }));
+var session = require("express-session");
+app.use(session({
+    secret: "SKETCHTHECONDUCTORTHEBESTRAPPER",
+    resave: false,
+    saveUninitialized: true,
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
+}));
 app.use(cors());
 app.use(morgan("dev"));
 app.use(express_1.default.json());
