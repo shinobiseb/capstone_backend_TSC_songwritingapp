@@ -1,7 +1,8 @@
-const mongoose = require("mongoose")
-
-//https://medium.com/swlh/set-up-an-express-js-app-with-passport-js-and-mongodb-for-password-authentication-6ea05d95335c
-const ThirdPartyProviderSchema = new mongoose.Schema({
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.User = void 0;
+var mongoose = require("mongoose");
+var ThirdPartyProviderSchema = new mongoose.Schema({
     provider_name: {
         type: String,
         default: null
@@ -14,10 +15,8 @@ const ThirdPartyProviderSchema = new mongoose.Schema({
         type: {},
         default: null
     }
-})
-
-//Create User Schema
-const UserSchema = new mongoose.Schema ({
+});
+var UserSchema = new mongoose.Schema({
     name: {
         type: String
     },
@@ -29,8 +28,6 @@ const UserSchema = new mongoose.Schema ({
     password: {
         type: String
     },
-    },
-{strict: false}
-);
-
-export const User = mongoose.model("users", UserSchema);
+}, { strict: false });
+exports.User = mongoose.model("users", UserSchema);
+//# sourceMappingURL=Users.js.map

@@ -42,9 +42,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 require("dotenv").config();
 var mongoose = require("mongoose");
-var app = (0, express_1.default)();
 var morgan = require("morgan");
 var cors = require("cors");
+var MongoStore = require('connect-mongo');
+var passport = require("./passport/setup");
+var auth = require("./routes/auth");
+var app = (0, express_1.default)();
 var DATABASE_URL = process.env.DATABASE_URL;
 var CONFIG = {
     useNewUrlParser: true,
@@ -65,6 +68,8 @@ var Note = model("Note", noteSchema);
 app.use(cors());
 app.use(morgan("dev"));
 app.use(express_1.default.json());
+app.use(passport.initialize());
+app.use(passport.session());
 app.get("/", function (req, res) {
     res.send("Five Nights at Freddy's: Security Breach has been released");
 });
