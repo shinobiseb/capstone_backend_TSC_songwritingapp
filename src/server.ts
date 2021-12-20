@@ -2,11 +2,19 @@
 //Dependencies 
 ////////////////
 import express, {Request, Response} from "express"
+import session from "express-session"
 require("dotenv").config()
 const mongoose = require("mongoose")
 const morgan = require("morgan")
 const cors = require("cors")
+const MongoStore = require("connect-mongo")(session);
+
+const passport = require("./passport/setup")
+const auth = require("./routes/auth")
+
 const app = express()
+
+
 
 //////////////////////////
 // DATABASE CONNECTIONS
@@ -44,6 +52,9 @@ const Note = model("Note", noteSchema)
 app.use(cors()) // prevent cors errors, opens up access for frontend
 app.use(morgan("dev")) //logging
 app.use(express.json()) // parse json bodies
+app.use(passport.intialize());
+app.use(passport.session());
+
 
 ///////////////
 // Routes
