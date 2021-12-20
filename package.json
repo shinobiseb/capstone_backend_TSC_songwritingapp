@@ -23,7 +23,8 @@
     "watch-ts": "tsc -w",
     "build": "tsc",
     "start": "node dist/server.js",
-    "go": "npm run build && npm run start"
+    "go": "npm run build && npm run start",
+    "add": "git add ."
   },
   "devDependencies": {
     "@types/cookie-session": "^2.0.43",

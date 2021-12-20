@@ -44,9 +44,6 @@ require("dotenv").config();
 var mongoose = require("mongoose");
 var morgan = require("morgan");
 var cors = require("cors");
-var MongoStore = require('connect-mongo');
-var passport = require("./passport/setup");
-var auth = require("./routes/auth");
 var app = (0, express_1.default)();
 var DATABASE_URL = process.env.DATABASE_URL;
 var CONFIG = {
@@ -67,18 +64,9 @@ var noteSchema = new Schema({
 var Note = model("Note", noteSchema);
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
-var session = require("express-session");
-app.use(session({
-    secret: "SKETCHTHECONDUCTORTHEBESTRAPPER",
-    resave: false,
-    saveUninitialized: true,
-    store: new MongoStore({ mongooseConnection: mongoose.connection })
-}));
 app.use(cors());
 app.use(morgan("dev"));
 app.use(express_1.default.json());
-app.use(passport.initialize());
-app.use(passport.session());
 app.get("/", function (req, res) {
     res.send("Five Nights at Freddy's: Security Breach has been released");
 });

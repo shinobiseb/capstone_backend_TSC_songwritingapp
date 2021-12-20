@@ -7,12 +7,12 @@ const mongoose = require("mongoose")
 const morgan = require("morgan")
 const cors = require("cors")
 
-import session from "cookie-session"
+// import session from "cookie-session"
 
-const MongoStore = require('connect-mongo');
+// const MongoStore = require('connect-mongo');
 
-const passport = require("./passport/setup")
-const auth = require("./routes/auth")
+// const passport = require("./passport/setup")
+// const auth = require("./routes/auth")
 
 const app = express()
 
@@ -60,14 +60,19 @@ app.use(express.urlencoded({ extended: false }));
 
 // const session = require("express-session")
 
-app.use(
-  session({
-    secret: "SKETCHTHECONDUCTORTHEBESTRAPPER",
-    // resave: false,
-    // saveUninitialized: true,
-    // store: new MongoStore({ mongooseConnection: mongoose.connection})
-  })
-);
+// app.use(cookieSession({
+//   name: 'session',
+//   keys: "SKETCHTHECONDUCTORTHEBESTRAPPER",
+// }))
+
+// app.use(
+//   session({
+//     secret: "SKETCHTHECONDUCTORTHEBESTRAPPER",
+//     // resave: false,
+//     // saveUninitialized: true,
+//     store: new MongoStore({ mongooseConnection: mongoose.connection})
+//   })
+// );
 
 
 /////////////////////////////////
@@ -76,8 +81,8 @@ app.use(
 app.use(cors()) // prevent cors errors, opens up access for frontend
 app.use(morgan("dev")) //logging
 app.use(express.json()) // parse json bodies
-app.use(passport.initialize()); //passport middle-ware
-app.use(passport.session());
+// app.use(passport.initialize()); //passport middle-ware
+// app.use(passport.session());
 
 
 
