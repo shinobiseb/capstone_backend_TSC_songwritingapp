@@ -4,9 +4,9 @@
 import express, {Request, Response} from "express"
 require("dotenv").config()
 const mongoose = require("mongoose")
-const app = express()
 const morgan = require("morgan")
 const cors = require("cors")
+const app = express()
 
 //////////////////////////
 // DATABASE CONNECTIONS
