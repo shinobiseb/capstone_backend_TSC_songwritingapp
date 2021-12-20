@@ -55,8 +55,8 @@ const Note = model("Note", noteSchema)
 /////////////////////////////////////
 
 // Bodyparser middleware, extended false does not allow nested payloads
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: false }));
 
 // const session = require("express-session")
 
@@ -133,6 +133,6 @@ app.delete("/notes/:id", async (req, res) => {
 })
 
 
-app.listen(3000, ()=> {
-    console.log(`listening on port 3k`)
-})
+app.listen(process.env.PORT || 3000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+});
